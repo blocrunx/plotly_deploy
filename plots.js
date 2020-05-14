@@ -42,12 +42,11 @@ function buildMetadata(sample) {
       level = washFreq * 20 + 6;
     } else if(washFreq ===5){
       level = washFreq * 20 - 2;
-    }else if(washFreq ===6){
+    } else if(washFreq ===6){
       level = washFreq * 20 - 5;
     } else if(washFreq ===7){
       level = washFreq * 20 - 7;
-    }
-    else{
+    } else{
       level = washFreq * 20;
     }
       // Multiply wash frequency by 180/9 and subtract 10 to center pointer
@@ -92,6 +91,7 @@ function buildMetadata(sample) {
   }];
 
   var layout = {
+    title: "Frequency of Naval Cleaning per Week",
     shapes:[{
         type: 'path',
         path: path,
@@ -116,9 +116,6 @@ function buildMetadata(sample) {
 
   Plotly.newPlot('gauge', data3, layout);
 
-      var layout = { width: 600, height: 400 };
-      //Plotly.newPlot('gauge', gaugeData, layout);
-      console.log(washFreq);
   });
 
 }
@@ -136,6 +133,7 @@ function buildCharts(sample){
         // Use map to get just the sample values from the object
         var mappedData = resultArray.map(sampVals => sampVals.sample_values);
         console.log(mappedData);
+        var bubbleSampData = mappedData[0];
         // Slice the data to get the top ten results
         var slicedValData = mappedData[0].slice(0,10);
         // Reverse the data for a cleaner look
@@ -143,6 +141,7 @@ function buildCharts(sample){
         console.log(slicedValData);
         // Use map to get just the otu_id values
         var mappedIdVals = resultArray.map(idVals => idVals.otu_ids);
+        var bubbleIdData = mappedIdVals[0];
         slicedIdVals = mappedIdVals[0].slice(0,10);
         slicedIdVals = slicedIdVals.reverse();
         console.log(slicedIdVals);
@@ -156,7 +155,7 @@ function buildCharts(sample){
         // Convert ints to Strings to use as y-labels
         yVals = slicedIdVals.map(converString => converString = "OTU " + converString);
 
-        // Bar plot trace 
+        // Bar plot trace
         console.log(yVals);
         var trace1 = {
             x: slicedValData,
@@ -171,11 +170,11 @@ function buildCharts(sample){
 
         // Bar plot layout object
         var layout2 = {
-            title: "",
+            title: "10 Most Common Naval Cultures from Volunteer " + sample,
             margin: {
               l: 85,
               r: 0,
-              t: 0,
+              t: 85,
               b: 0
             }
           };
@@ -183,14 +182,16 @@ function buildCharts(sample){
         Plotly.newPlot("bar", plotData,layout2);
 
         // --- BUBBLE PLOT ---
+
+
         var trace2 = {
-            x: slicedIdVals,
-            y: slicedValData,
+            x: bubbleIdData,
+            y: bubbleSampData,
             text: slicedLabelVals,
             mode: "markers",
             marker: {
-                color: slicedIdVals,
-                size: slicedValData
+                color: bubbleIdData,
+                size: bubbleSampData
             }
         };
 
