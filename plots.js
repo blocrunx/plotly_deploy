@@ -60,10 +60,12 @@ function buildCharts(sample){
         slicedLabelVals = mappedLabels[0].slice(0,10);
         slicedLabelVals = slicedLabelVals.reverse();
         console.log(slicedLabelVals);
-
+        
+        // --- BAR PLOT ---
         // Convert ints to Strings to use as y-labels
         yVals = slicedIdVals.map(converString => converString = "OTU " + converString);
-        // trace for sample data
+        
+        // Bar plot trace 
         console.log(yVals);
         var trace1 = {
             x: slicedValData,
@@ -76,8 +78,9 @@ function buildCharts(sample){
 
         var plotData = [trace1];
         
+        // Bar plot layout object
         var layout = {
-            title: "Greek gods search results",
+            title: "",
             margin: {
               l: 200,
               r: 200,
@@ -87,7 +90,29 @@ function buildCharts(sample){
           };
         // Render the plot to the div tag "bar"
         Plotly.newPlot("bar", plotData);
+        
+        // --- BUBBLE PLOT ---
+        var trace2 = {
+            x: slicedIdVals,
+            y: slicedValData,
+            text: slicedLabelVals,
+            mode: "markers",
+            marker: {
+                color: slicedIdVals,
+                size: slicedValData
+            }
+        };
 
+        var bubblePlot = [trace2];
+        
+        var layout2 = {
+            title: 'Marker Size and Color',
+            showlegend: false,
+            height: 600,
+            width: 1200
+          };
+
+        Plotly.newPlot('bubble', bubblePlot, layout2)
 
         //var sampVals = data.samples;
         //sortedSamps = sampVals.sort((a,b) => parseFloat(a.otu_ids) - parseFloat(b.otu_ids))
