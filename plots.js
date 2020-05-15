@@ -42,6 +42,8 @@ function buildMetadata(sample) {
       level = washFreq * 20 + 7;
     } else if(washFreq ===3){
       level = washFreq * 20 + 6;
+    } else if(washFreq ===4){
+      level = washFreq * 20 + 3;
     } else if(washFreq ===5){
       level = washFreq * 20 - 2;
     } else if(washFreq ===6){
@@ -191,7 +193,9 @@ function buildCharts(sample){
             y: bubbleSampData,
             text: slicedLabelVals,
             mode: "markers",
+            
             marker: {
+                colorscale: "Portland",
                 color: bubbleIdData,
                 size: bubbleSampData
             }
