@@ -1,6 +1,6 @@
 function init() {
     var selector = d3.select("#selDataset");
-  
+    var startingValue = 940;
     d3.json("samples.json").then((data) => {
       console.log(data);
       var sampleNames = data.names;
@@ -11,6 +11,8 @@ function init() {
           .property("value", sample);
       });
   });
+buildMetadata(startingValue);
+buildCharts(startingValue);
 }
   
 function optionChanged(newSample) {
