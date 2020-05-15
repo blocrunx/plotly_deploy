@@ -14,12 +14,12 @@ function init() {
 buildMetadata(startingValue);
 buildCharts(startingValue);
 }
-  
+
 function optionChanged(newSample) {
     buildMetadata(newSample);
     buildCharts(newSample);
   }
-  
+
 function buildMetadata(sample) {
   d3.json("samples.json").then((data) => {
     var metadata = data.metadata;
@@ -53,10 +53,10 @@ function buildMetadata(sample) {
     } else{
       level = washFreq * 20;
     }
-      
+  // Gauge inspired by blog post from https://com2m.de/blog/technology/gauge-charts-with-plotly/
   // Trig to calc meter point
   var degrees = 180 - level,
-      radius = .5;
+      radius = 0.5;
   var radians = degrees * Math.PI / 180;
   var x = radius * Math.cos(radians);
   var y = radius * Math.sin(radians);
@@ -87,7 +87,7 @@ function buildMetadata(sample) {
                           'rgba((42, 161, 6, 0.3)','rgba((42, 161, 6, 0.2)',
                           'rgba((42, 161, 6, 0.1)','rgb(255, 255, 255)']},
     hoverinfo: 'text',
-    hole: .5,
+    hole: 0.5,
     type: 'pie',
     showlegend: false
   }];
@@ -191,7 +191,7 @@ function buildCharts(sample){
             y: bubbleSampData,
             text: slicedLabelVals,
             mode: "markers",
-            
+
             marker: {
                 colorscale: "Portland",
                 color: bubbleIdData,
