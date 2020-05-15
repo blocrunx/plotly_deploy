@@ -53,9 +53,7 @@ function buildMetadata(sample) {
     } else{
       level = washFreq * 20;
     }
-      // Multiply wash frequency by 180/9 and subtract 10 to center pointer
-  //var level = washFreq * 20 - 10;
-
+      
   // Trig to calc meter point
   var degrees = 180 - level,
       radius = .5;
@@ -77,7 +75,7 @@ function buildMetadata(sample) {
       showlegend: false,
       name: 'Wash Frequency',
       text: level,
-      hoverinfo: 'text+name'},
+      hoverinfo: 'name'},
     { values: [1,1,1,1,1,1,1,1,1,9],
     rotation: 90,
     text: ['8-9','7-8','6-7','5-6','4-5','3-4','2-3','1-2','0-1'],
@@ -88,7 +86,7 @@ function buildMetadata(sample) {
                           'rgba((42, 161, 6, 0.5)','rgba((42, 161, 6, 0.4)',
                           'rgba((42, 161, 6, 0.3)','rgba((42, 161, 6, 0.2)',
                           'rgba((42, 161, 6, 0.1)','rgb(255, 255, 255)']},
-    hoverinfo: 'label',
+    hoverinfo: 'text',
     hole: .5,
     type: 'pie',
     showlegend: false
